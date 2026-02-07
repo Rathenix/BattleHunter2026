@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://d2mmny40lxyp4"]
+
+[ext_resource type="Texture2D" uid="uid://80v2nbg6lowh" path="res://assets/old-title.png" id="1_fgkus"]
+[ext_resource type="Script" uid="uid://dhlmd1deslb5f" path="res://scripts/title_screen.gd" id="1_sa3yf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sa3yf"]
+font_size = 120
+
+[node name="TitleScreen" type="Node2D" unique_id=1313286044]
+script = ExtResource("1_sa3yf")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2103849613]
+offset_right = 1152.0
+offset_bottom = 649.0
+color = Color(0, 0.03137255, 0.14901961, 1)
+
+[node name="OldTitle" type="Sprite2D" parent="." unique_id=976779509]
+position = Vector2(575, 322)
+scale = Vector2(2.7000005, 2.7000003)
+texture = ExtResource("1_fgkus")
+
+[node name="Label" type="Label" parent="." unique_id=1749777714]
+offset_left = 412.0
+offset_top = 331.0
+offset_right = 732.0
+offset_bottom = 496.0
+text = "2026"
+label_settings = SubResource("LabelSettings_sa3yf")

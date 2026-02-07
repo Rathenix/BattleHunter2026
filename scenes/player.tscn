@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://bjj450ewxv7kr"]
+
+[ext_resource type="Script" uid="uid://da6j1hebo8ev3" path="res://scripts/player.gd" id="1_3vyb7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3vyb7"]
+font_size = 54
+
+[sub_resource type="LabelSettings" id="LabelSettings_g2els"]
+font_size = 48
+
+[node name="Player" type="Node2D" unique_id=313522435]
+script = ExtResource("1_3vyb7")
+
+[node name="StatBlock" type="ColorRect" parent="." unique_id=191057531]
+offset_left = 35.0
+offset_top = 401.0
+offset_right = 281.0
+offset_bottom = 624.0
+color = Color(1, 1, 1, 0.28235295)
+
+[node name="ColorIndicator" type="ColorRect" parent="StatBlock" unique_id=1828402527]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 11.0
+offset_right = 235.0
+offset_bottom = 22.0
+color = Color(0.08163976, 0.30920905, 0.9554885, 1)
+
+[node name="HunterNameValue" type="Label" parent="StatBlock" unique_id=1075193410]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 14.0
+offset_right = 217.0
+offset_bottom = 88.0
+text = "Hunter"
+label_settings = SubResource("LabelSettings_3vyb7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HunterHpBar" type="ProgressBar" parent="StatBlock" unique_id=1432213040]
+modulate = Color(0.09803922, 1, 0.06666667, 1)
+layout_mode = 0
+offset_left = 15.0
+offset_top = 84.0
+offset_right = 230.0
+offset_bottom = 100.0
+value = 50.0
+show_percentage = false
+
+[node name="HunterHpValues" type="Label" parent="StatBlock" unique_id=124197770]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 102.0
+offset_right = 80.0
+offset_bottom = 125.0
+text = "0 / 0"
+
+[node name="HunterAttackValue" type="Label" parent="StatBlock" unique_id=444677163]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 122.0
+offset_right = 77.0
+offset_bottom = 196.0
+text = "0"
+label_settings = SubResource("LabelSettings_g2els")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HunterAttackLabel" type="Label" parent="StatBlock" unique_id=76481917]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 180.0
+offset_right = 77.0
+offset_bottom = 203.0
+text = "Attack"
+
+[node name="HunterDefenseValue" type="Label" parent="StatBlock" unique_id=1242156909]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 123.0
+offset_right = 159.0
+offset_bottom = 197.0
+text = "0"
+label_settings = SubResource("LabelSettings_g2els")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HunterDefenseLabel" type="Label" parent="StatBlock" unique_id=2142865772]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 180.0
+offset_right = 162.0
+offset_bottom = 203.0
+text = "Defense"
+
+[node name="HunterSpeedValue" type="Label" parent="StatBlock" unique_id=1331809809]
+layout_mode = 0
+offset_left = 179.0
+offset_top = 122.0
+offset_right = 235.0
+offset_bottom = 196.0
+text = "0"
+label_settings = SubResource("LabelSettings_g2els")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HunterSpeedLabel" type="Label" parent="StatBlock" unique_id=1217820054]
+layout_mode = 0
+offset_left = 182.0
+offset_top = 180.0
+offset_right = 232.0
+offset_bottom = 203.0
+text = "Speed"
