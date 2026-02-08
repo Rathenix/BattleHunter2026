@@ -1,6 +1,18 @@
 [gd_scene format=3 uid="uid://bjj450ewxv7kr"]
 
 [ext_resource type="Script" uid="uid://da6j1hebo8ev3" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="Texture2D" uid="uid://bnr78kbwcyli5" path="res://assets/icon.svg" id="2_g2els"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qhqgy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_g2els")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3vyb7"]
 font_size = 54
@@ -11,7 +23,12 @@ font_size = 48
 [node name="Player" type="Node2D" unique_id=313522435]
 script = ExtResource("1_3vyb7")
 
+[node name="CharacterSprite" type="AnimatedSprite2D" parent="." unique_id=1585929591]
+visible = false
+sprite_frames = SubResource("SpriteFrames_qhqgy")
+
 [node name="StatBlock" type="ColorRect" parent="." unique_id=191057531]
+visible = false
 offset_left = 35.0
 offset_top = 401.0
 offset_right = 281.0
@@ -111,3 +128,170 @@ offset_top = 180.0
 offset_right = 232.0
 offset_bottom = 203.0
 text = "Speed"
+
+[node name="HunterEditMenu" type="Node2D" parent="." unique_id=1531908656]
+visible = false
+
+[node name="HunterSkillpointsLabel" type="Label" parent="HunterEditMenu" unique_id=1890420815]
+offset_left = 40.0
+offset_top = 23.0
+offset_right = 181.0
+offset_bottom = 46.0
+text = "Skillpoints Left:"
+
+[node name="HunterSkillpointsValue" type="Label" parent="HunterEditMenu" unique_id=1071428550]
+offset_left = 168.0
+offset_top = 23.0
+offset_right = 309.0
+offset_bottom = 46.0
+text = "10"
+
+[node name="HunterNameLabel" type="Label" parent="HunterEditMenu" unique_id=1681138019]
+offset_left = 288.0
+offset_top = 57.0
+offset_right = 398.0
+offset_bottom = 80.0
+text = "Hunter Name:"
+
+[node name="HunterNameTextbox" type="LineEdit" parent="HunterEditMenu" unique_id=1671508164]
+offset_left = 428.0
+offset_top = 53.0
+offset_right = 597.0
+offset_bottom = 84.0
+
+[node name="HunterHpLabel" type="Label" parent="HunterEditMenu" unique_id=130263311]
+offset_left = 307.0
+offset_top = 131.0
+offset_right = 387.0
+offset_bottom = 154.0
+text = "Hit Points:"
+
+[node name="HpDecrementButton" type="Button" parent="HunterEditMenu" unique_id=55937483]
+offset_left = 424.0
+offset_top = 129.0
+offset_right = 450.0
+offset_bottom = 160.0
+text = " - "
+
+[node name="HunterHpValue" type="Label" parent="HunterEditMenu" unique_id=521180673]
+offset_left = 469.0
+offset_top = 132.0
+offset_right = 610.0
+offset_bottom = 155.0
+text = "0"
+
+[node name="HpIncrementButton" type="Button" parent="HunterEditMenu" unique_id=588167097]
+offset_left = 513.0
+offset_top = 129.0
+offset_right = 539.0
+offset_bottom = 160.0
+text = " + "
+
+[node name="HunterAttackLabel" type="Label" parent="HunterEditMenu" unique_id=1408752086]
+offset_left = 330.0
+offset_top = 200.0
+offset_right = 385.0
+offset_bottom = 223.0
+text = "Attack:"
+
+[node name="AttackDecrementButton" type="Button" parent="HunterEditMenu" unique_id=245448951]
+offset_left = 422.0
+offset_top = 190.0
+offset_right = 448.0
+offset_bottom = 221.0
+text = " - "
+
+[node name="HunterAttackValue" type="Label" parent="HunterEditMenu" unique_id=538094597]
+offset_left = 468.0
+offset_top = 198.0
+offset_right = 609.0
+offset_bottom = 221.0
+text = "0"
+
+[node name="AttackIncrementButton" type="Button" parent="HunterEditMenu" unique_id=2037528770]
+offset_left = 513.0
+offset_top = 192.0
+offset_right = 539.0
+offset_bottom = 223.0
+text = " + "
+
+[node name="HunterDefenseLabel" type="Label" parent="HunterEditMenu" unique_id=270714981]
+offset_left = 322.0
+offset_top = 244.0
+offset_right = 390.0
+offset_bottom = 267.0
+text = "Defense:"
+
+[node name="DefenseDecrementButton" type="Button" parent="HunterEditMenu" unique_id=1854628927]
+offset_left = 423.0
+offset_top = 243.0
+offset_right = 449.0
+offset_bottom = 274.0
+text = " - "
+
+[node name="HunterDefenseValue" type="Label" parent="HunterEditMenu" unique_id=1158691556]
+offset_left = 472.0
+offset_top = 247.0
+offset_right = 613.0
+offset_bottom = 270.0
+text = "0"
+
+[node name="DefenseIncrementButton" type="Button" parent="HunterEditMenu" unique_id=275803227]
+offset_left = 514.0
+offset_top = 242.0
+offset_right = 540.0
+offset_bottom = 273.0
+text = " + "
+
+[node name="HunterSpeedLabel" type="Label" parent="HunterEditMenu" unique_id=236149231]
+offset_left = 330.0
+offset_top = 287.0
+offset_right = 440.0
+offset_bottom = 310.0
+text = "Speed:"
+
+[node name="SpeedDecrementButton" type="Button" parent="HunterEditMenu" unique_id=1593087240]
+offset_left = 423.0
+offset_top = 281.0
+offset_right = 449.0
+offset_bottom = 312.0
+text = " - "
+
+[node name="HunterSpeedValue" type="Label" parent="HunterEditMenu" unique_id=428411506]
+offset_left = 469.0
+offset_top = 287.0
+offset_right = 610.0
+offset_bottom = 310.0
+text = "0"
+
+[node name="SpeedIncrementButton" type="Button" parent="HunterEditMenu" unique_id=661456211]
+offset_left = 515.0
+offset_top = 279.0
+offset_right = 541.0
+offset_bottom = 310.0
+text = " + "
+
+[node name="HunterSaveButton" type="Button" parent="HunterEditMenu" unique_id=2040496551]
+offset_left = 387.0
+offset_top = 333.0
+offset_right = 490.0
+offset_bottom = 364.0
+text = "Save Hunter"
+
+[node name="HunterCancelButton" type="Button" parent="HunterEditMenu" unique_id=92622804]
+offset_left = 527.0
+offset_top = 334.0
+offset_right = 587.0
+offset_bottom = 365.0
+text = "Cancel"
+
+[connection signal="pressed" from="HunterEditMenu/HpDecrementButton" to="." method="_on_hp_decrement_button_pressed"]
+[connection signal="pressed" from="HunterEditMenu/HpIncrementButton" to="." method="_on_hp_increment_button_pressed"]
+[connection signal="pressed" from="HunterEditMenu/AttackDecrementButton" to="." method="_on_attack_decrement_button_pressed"]
+[connection signal="pressed" from="HunterEditMenu/AttackIncrementButton" to="." method="_on_attack_increment_button_pressed"]
+[connection signal="pressed" from="HunterEditMenu/DefenseDecrementButton" to="." method="_on_defense_decrement_button_pressed"]
+[connection signal="pressed" from="HunterEditMenu/DefenseIncrementButton" to="." method="_on_defense_increment_button_pressed"]
+[connection signal="pressed" from="HunterEditMenu/SpeedDecrementButton" to="." method="_on_speed_decrement_button_pressed"]
+[connection signal="pressed" from="HunterEditMenu/SpeedIncrementButton" to="." method="_on_speed_increment_button_pressed"]
+[connection signal="pressed" from="HunterEditMenu/HunterSaveButton" to="." method="_on_hunter_save_button_pressed"]
+[connection signal="pressed" from="HunterEditMenu/HunterCancelButton" to="." method="_on_hunter_cancel_button_pressed"]

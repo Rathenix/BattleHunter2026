@@ -7,8 +7,8 @@ func _ready() -> void:
 	GameManager.game_state = GameManager.STATES.MENU
 	$TopButtons.visible = true
 	$InnButtons.visible = false
-	$HunterEditMenu.visible = false
 	$ShopMenu.visible = false
+	$TopButtons/InnButton.grab_focus.call_deferred()
 
 func _process(_delta: float) -> void:
 	pass
@@ -30,35 +30,21 @@ func _on_new_hunter_button_pressed() -> void:
 	if GameManager.players[GameManager.active_player] == null:
 		allow_player_swap = false
 		$InnButtons.visible = false
-		$HunterEditMenu/HunterSkillpointsValue.text = "10"
-		$HunterEditMenu/HunterNameTextbox.text = ""
-		$HunterEditMenu/HunterHpValue.text = "0"
-		$HunterEditMenu/HunterAttackValue.text = "0"
-		$HunterEditMenu/HunterDefenseValue.text = "0"
-		$HunterEditMenu/HunterSpeedValue.text = "0"
-		$HunterEditMenu.visible = true
+		var new_player = player_scene.instantiate()
+		add_child(new_player)
+		new_player.create_new()
+		new_player.hunter_changes_saved.connect(_on_hunter_changes_saved)
+		new_player.hunter_changes_cancelled.connect(_on_hunter_changes_cancelled)
 
-func _on_hunter_cancel_button_pressed() -> void:
-	$HunterEditMenu.visible = false
+func _on_hunter_changes_saved(hunter) -> void:
+	GameManager.players[GameManager.active_player] = hunter
 	$InnButtons.visible = true
 	allow_player_swap = true
 
-func _on_hunter_save_button_pressed() -> void:
-	if $HunterEditMenu/HunterNameTextbox.text != "":
-		var new_player = player_scene.instantiate()
-		new_player.player_name = $HunterEditMenu/HunterNameTextbox.text
-		new_player.player_level = 1
-		new_player.player_max_hp = int($HunterEditMenu/HunterHpValue.text)
-		new_player.player_current_hp = new_player.player_max_hp
-		new_player.player_attack = int($HunterEditMenu/HunterAttackValue.text)
-		new_player.player_defense = int($HunterEditMenu/HunterDefenseValue.text)
-		new_player.player_speed = int($HunterEditMenu/HunterSpeedValue.text)
-		new_player.player_skillpoints = int($HunterEditMenu/HunterSkillpointsValue.text)
-		add_child(new_player)
-		GameManager.players[GameManager.active_player] = new_player
-		$HunterEditMenu.visible = false
-		$InnButtons.visible = true
-		allow_player_swap = true
+func _on_hunter_changes_cancelled(hunter) -> void:
+	hunter.queue_free()
+	$InnButtons.visible = true
+	allow_player_swap = true
 
 func _on_retire_button_pressed() -> void:
 	if GameManager.players[GameManager.active_player]:
@@ -85,80 +71,3 @@ func _on_battle_button_pressed() -> void:
 
 func _on_options_button_pressed() -> void:
 	pass # Replace with function body.
-
-func _on_hunter_edit_button_pressed() -> void:
-	pass # Replace with function body.
-
-
-func _on_hp_decrement_button_pressed() -> void:
-	recalc_hunter_skillpoints("hp", -1)
-
-func _on_hp_increment_button_pressed() -> void:
-	recalc_hunter_skillpoints("hp", 1)
-
-func _on_attack_decrement_button_pressed() -> void:
-	recalc_hunter_skillpoints("attack", -1)
-
-func _on_attack_increment_button_pressed() -> void:
-	recalc_hunter_skillpoints("attack", 1)
-
-func _on_defense_decrement_button_pressed() -> void:
-	recalc_hunter_skillpoints("defense", -1)
-
-func _on_defense_increment_button_pressed() -> void:
-	recalc_hunter_skillpoints("defense", 1)
-
-func _on_speed_decrement_button_pressed() -> void:
-	recalc_hunter_skillpoints("speed", -1)
-
-func _on_speed_increment_button_pressed() -> void:
-	recalc_hunter_skillpoints("speed", 1)
-
-func recalc_hunter_skillpoints(stat, value) -> void:
-	var skillpoints_left = int($HunterEditMenu/HunterSkillpointsValue.text)
-	if value > 0 and skillpoints_left > 0:
-		match stat:
-			"hp":
-				var old_value = int($HunterEditMenu/HunterHpValue.text)
-				var new_value = old_value + 1
-				$HunterEditMenu/HunterHpValue.text = str(new_value)
-			"attack":
-				var old_value = int($HunterEditMenu/HunterAttackValue.text)
-				var new_value = old_value + 1
-				$HunterEditMenu/HunterAttackValue.text = str(new_value)
-			"defense":
-				var old_value = int($HunterEditMenu/HunterDefenseValue.text)
-				var new_value = old_value + 1
-				$HunterEditMenu/HunterDefenseValue.text = str(new_value)
-			"speed":
-				var old_value = int($HunterEditMenu/HunterSpeedValue.text)
-				var new_value = old_value + 1
-				$HunterEditMenu/HunterSpeedValue.text = str(new_value)
-		skillpoints_left -= 1
-	if value < 0:
-		match stat:
-			"hp":
-				var old_value = int($HunterEditMenu/HunterHpValue.text)
-				if old_value > 0:
-					var new_value = old_value - 1
-					skillpoints_left += 1
-					$HunterEditMenu/HunterHpValue.text = str(new_value)
-			"attack":
-				var old_value = int($HunterEditMenu/HunterAttackValue.text)
-				if old_value > 0:
-					var new_value = old_value - 1
-					skillpoints_left += 1
-					$HunterEditMenu/HunterAttackValue.text = str(new_value)
-			"defense":
-				var old_value = int($HunterEditMenu/HunterDefenseValue.text)
-				if old_value > 0:
-					var new_value = old_value - 1
-					skillpoints_left += 1
-					$HunterEditMenu/HunterDefenseValue.text = str(new_value)
-			"speed":
-				var old_value = int($HunterEditMenu/HunterSpeedValue.text)
-				if old_value > 0:
-					var new_value = old_value - 1
-					skillpoints_left += 1
-					$HunterEditMenu/HunterSpeedValue.text = str(new_value)
-	$HunterEditMenu/HunterSkillpointsValue.text = str(skillpoints_left)
