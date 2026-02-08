@@ -1,5 +1,6 @@
 extends Node2D
 
+var player_slot = 1
 var player_name = ""
 var player_level = 1
 var player_max_hp = 0
@@ -26,7 +27,37 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
+func serialize():
+	calculate_stats()
+	return {
+		"player_slot": player_slot,
+		"player_name": player_name,
+		"player_level": player_level,
+		"player_max_hp": player_max_hp,
+		"player_current_hp": player_current_hp,
+		"player_attack": player_attack,
+		"player_defense": player_defense,
+		"player_speed": player_speed,
+		"player_skillpoints": player_skillpoints,
+		"player_status": player_status
+	}
+
+func load_hunter(hunter) -> void:
+	if hunter != null:
+		player_slot = hunter.player_slot
+		player_name = hunter.player_name
+		player_level = hunter.player_level
+		player_max_hp = hunter.player_max_hp
+		player_current_hp = hunter.player_current_hp
+		player_attack = hunter.player_attack
+		player_defense = hunter.player_defense
+		player_speed = hunter.player_speed
+		player_skillpoints = hunter.player_skillpoints
+		player_status = hunter.player_status
+		setup_stat_block()
+
 func create_new() -> void:
+	player_slot = GameManager.active_player
 	setup_edit_menu()
 
 func calculate_stats() -> void:
@@ -48,9 +79,9 @@ func setup_edit_menu() -> void:
 
 func setup_stat_block() -> void:
 	calculate_stats()
-	var x_pos = 35 + ((GameManager.active_player - 1) * 281) 
+	var x_pos = 35 + ((player_slot - 1) * 281) 
 	$StatBlock.position = Vector2(x_pos, 400)
-	$StatBlock/ColorIndicator.color = PLAYER_COLORS[GameManager.active_player - 1]
+	$StatBlock/ColorIndicator.color = PLAYER_COLORS[player_slot - 1]
 	$StatBlock/HunterNameValue.text = str(player_name)
 	$StatBlock/HunterHpValues.text = str(player_current_hp) + " / " + str(player_max_hp)
 	$StatBlock/HunterHpBar.max_value = player_max_hp
@@ -108,3 +139,7 @@ func _on_hunter_cancel_button_pressed() -> void:
 	$HunterEditMenu.visible = false
 	$StatBlock.visible = true
 	hunter_changes_cancelled.emit(self)
+
+func setup_map_sprite() -> void:
+	$CharacterSprite.position = Vector2(100 * player_slot, 200)
+	$CharacterSprite.visible = true

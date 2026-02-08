@@ -21,6 +21,9 @@ func _input(event: InputEvent) -> void:
 			new = 1
 		GameManager.active_player = new
 		print("Active Player: ", GameManager.active_player)
+	if event.is_action_pressed("go_back"):
+		$InnButtons.visible = false
+		$TopButtons.visible = true
 
 func _on_inn_button_pressed() -> void:
 	$TopButtons.visible = false
@@ -37,7 +40,7 @@ func _on_new_hunter_button_pressed() -> void:
 		new_player.hunter_changes_cancelled.connect(_on_hunter_changes_cancelled)
 
 func _on_hunter_changes_saved(hunter) -> void:
-	GameManager.players[GameManager.active_player] = hunter
+	GameManager.players[GameManager.active_player] = hunter.serialize()
 	$InnButtons.visible = true
 	allow_player_swap = true
 
@@ -66,7 +69,9 @@ func _on_recruit_button_pressed() -> void:
 
 
 func _on_battle_button_pressed() -> void:
-	pass # Replace with function body.
+	if GameManager.active_player != null:
+		print(GameManager.players)
+		get_tree().change_scene_to_file("res://scenes/hunt_screen.tscn")
 
 
 func _on_options_button_pressed() -> void:
