@@ -25,6 +25,7 @@ script = ExtResource("1_3vyb7")
 
 [node name="CharacterSprite" type="AnimatedSprite2D" parent="." unique_id=1585929591]
 visible = false
+scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_qhqgy")
 
 [node name="StatBlock" type="ColorRect" parent="." unique_id=191057531]
